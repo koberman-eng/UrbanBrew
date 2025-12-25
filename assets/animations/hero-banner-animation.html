@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео Анимация - Urban Brew</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .banner {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0a1a2e 0%, #162447 50%, #1f4068 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 100px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Декоративные шары */
+        .ornament-ball {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            animation: ballSwing 3s ease-in-out infinite;
+            box-shadow: 0 0 20px currentColor;
+        }
+        
+        .ball-1 {
+            top: 10%;
+            left: 10%;
+            background: #FF0000;
+            color: #FF0000;
+            animation-delay: 0s;
+        }
+        
+        .ball-2 {
+            top: 15%;
+            right: 15%;
+            background: #00FF00;
+            color: #00FF00;
+            animation-delay: 0.5s;
+        }
+        
+        .ball-3 {
+            bottom: 20%;
+            left: 15%;
+            background: #FFD700;
+            color: #FFD700;
+            animation-delay: 1s;
+        }
+        
+        .ball-4 {
+            bottom: 15%;
+            right: 10%;
+            background: #FF1493;
+            color: #FF1493;
+            animation-delay: 1.5s;
+        }
+        
+        /* Чашки кофе */
+        .coffee-cups {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .cup {
+            position: absolute;
+            width: 100px;
+            height: 120px;
+            animation: cupFloat 4s ease-in-out infinite;
+        }
+        
+        .cup-1 {
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .cup-2 {
+            top: 60%;
+            right: 8%;
+            animation-delay: 1s;
+        }
+        
+        .cup-body {
+            width: 70px;
+            height: 90px;
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            border-radius: 0 0 12px 12px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        
+        .cup-handle {
+            position: absolute;
+            right: -12px;
+            top: 15px;
+            width: 25px;
+            height: 40px;
+            border: 6px solid #8B4513;
+            border-left: none;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .coffee-liquid {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .steam-line {
+            position: absolute;
+            width: 3px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: -20px;
+            animation: steamRise 2.5s ease-in-out infinite;
+        }
+        
+        .steam-1 { left: 15px; animation-delay: 0s; }
+        .steam-2 { left: 35px; animation-delay: 0.3s; }
+        .steam-3 { left: 55px; animation-delay: 0.6s; }
+        
+        /* Звезда на чашке */
+        .star {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: #FFD700;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: starTwinkle 1.5s ease-in-out infinite;
+            box-shadow: 0 0 15px #FFD700;
+        }
+        
+        /* Главный текст */
+        .main-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 96px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            animation: textGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Подзаголовок */
+        .subtitle {
+            font-size: 28px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSlide 1.5s ease-out 1s both;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 3px;
+        }
+        
+        /* Снежинки */
+        .snowflake {
+            position: absolute;
+            color: #FFFFFF;
+            font-size: 24px;
+            animation: snowfall linear infinite;
+            opacity: 0.9;
+        }
+        
+        @keyframes ballSwing {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        @keyframes cupFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(3deg);
+            }
+        }
+        
+        @keyframes steamRise {
+            0% {
+                opacity: 0.4;
+                transform: translateY(0) scaleY(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(-20px) scaleY(1.2);
+            }
+            100% {
+                opacity: 0.2;
+                transform: translateY(-40px) scaleY(0.6);
+            }
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.3);
+            }
+        }
+        
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(255, 215, 0, 1), 0 0 100px rgba(255, 215, 0, 0.6), 0 0 150px rgba(255, 215, 0, 0.3);
+            }
+        }
+        
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(730px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <!-- Снежинки -->
+        <div class="snowflake" style="left: 5%; animation-duration: 10s;">❄</div>
+        <div class="snowflake" style="left: 15%; animation-duration: 12s; animation-delay: 1s;">❄</div>
+        <div class="snowflake" style="left: 25%; animation-duration: 11s; animation-delay: 2s;">❄</div>
+        <div class="snowflake" style="left: 35%; animation-duration: 13s; animation-delay: 0.5s;">❄</div>
+        <div class="snowflake" style="left: 45%; animation-duration: 10s; animation-delay: 1.5s;">❄</div>
+        <div class="snowflake" style="left: 55%; animation-duration: 12s; animation-delay: 2.5s;">❄</div>
+        <div class="snowflake" style="left: 65%; animation-duration: 11s; animation-delay: 0.8s;">❄</div>
+        <div class="snowflake" style="left: 75%; animation-duration: 13s; animation-delay: 1.8s;">❄</div>
+        <div class="snowflake" style="left: 85%; animation-duration: 10s; animation-delay: 3s;">❄</div>
+        <div class="snowflake" style="left: 95%; animation-duration: 12s; animation-delay: 0.3s;">❄</div>
+        
+        <!-- Декоративные шары -->
+        <div class="ornament-ball ball-1"></div>
+        <div class="ornament-ball ball-2"></div>
+        <div class="ornament-ball ball-3"></div>
+        <div class="ornament-ball ball-4"></div>
+        
+        <!-- Чашки кофе -->
+        <div class="coffee-cups">
+            <div class="cup cup-1">
+                <div class="cup-body">
+                    <div class="coffee-liquid"></div>
+                    <div class="star"></div>
+                </div>
+                <div class="cup-handle"></div>
+                <div class="steam-line steam-1"></div>
+                <div class="steam-line steam-2"></div>
+                <div class="steam-line steam-3"></div>
+            </div>
+            
+            <div class="cup cup-2">
+                <div class="cup-body">
+                    <div class="coffee-liquid"></div>
+                    <div class="star"></div>
+                </div>
+                <div class="cup-handle"></div>
+                <div class="steam-line steam-1"></div>
+                <div class="steam-line steam-2"></div>
+                <div class="steam-line steam-3"></div>
+            </div>
+        </div>
+        
+        <h1 class="main-text">URBAN BREW</h1>
+        <p class="subtitle">PREMIUM COFFEE EXPERIENCE</p>
+    </div>
+</body>
+</html>

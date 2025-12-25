@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Анимация - Urban Brew</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Снежинки */
+        .snowflake {
+            position: absolute;
+            color: #FFFFFF;
+            font-size: 20px;
+            animation: snowfall linear infinite;
+            opacity: 0.8;
+        }
+        
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        /* Чашка кофе с декоративными элементами */
+        .coffee-cup {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-right: 30px;
+            animation: cupFloat 3s ease-in-out infinite;
+        }
+        
+        .cup-body {
+            width: 80px;
+            height: 90px;
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .cup-handle {
+            position: absolute;
+            right: -15px;
+            top: 20px;
+            width: 30px;
+            height: 50px;
+            border: 8px solid #8B4513;
+            border-left: none;
+            border-radius: 0 20px 20px 0;
+        }
+        
+        .coffee-liquid {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+            border-radius: 0 0 12px 12px;
+            animation: coffeeSteam 2s ease-in-out infinite;
+        }
+        
+        .steam {
+            position: absolute;
+            width: 4px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: steamRise 2s ease-in-out infinite;
+        }
+        
+        .steam-1 {
+            left: 20px;
+            top: -20px;
+            animation-delay: 0s;
+        }
+        
+        .steam-2 {
+            left: 40px;
+            top: -25px;
+            animation-delay: 0.3s;
+        }
+        
+        .steam-3 {
+            left: 60px;
+            top: -20px;
+            animation-delay: 0.6s;
+        }
+        
+        /* Декоративные украшения на чашке */
+        .ornament {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: ornamentGlow 2s ease-in-out infinite;
+        }
+        
+        .ornament-1 {
+            background: #FF0000;
+            top: 15px;
+            left: 15px;
+            box-shadow: 0 0 10px #FF0000;
+            animation-delay: 0s;
+        }
+        
+        .ornament-2 {
+            background: #00FF00;
+            top: 15px;
+            right: 15px;
+            box-shadow: 0 0 10px #00FF00;
+            animation-delay: 0.5s;
+        }
+        
+        .ornament-3 {
+            background: #FFD700;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #FFD700;
+            animation-delay: 1s;
+        }
+        
+        /* Текст */
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 42px;
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            animation: textSparkle 2s ease-in-out infinite;
+        }
+        
+        .letter {
+            display: inline-block;
+            animation: letterBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        
+        .letter:nth-child(1) { animation-delay: 0s; }
+        .letter:nth-child(2) { animation-delay: 0.1s; }
+        .letter:nth-child(3) { animation-delay: 0.2s; }
+        .letter:nth-child(4) { animation-delay: 0.3s; }
+        .letter:nth-child(5) { animation-delay: 0.4s; }
+        .letter:nth-child(6) { animation-delay: 0.5s; }
+        .letter:nth-child(7) { animation-delay: 0.6s; }
+        .letter:nth-child(8) { animation-delay: 0.7s; }
+        .letter:nth-child(9) { animation-delay: 0.8s; }
+        
+        @keyframes cupFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+        
+        @keyframes coffeeSteam {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(1.05);
+            }
+        }
+        
+        @keyframes steamRise {
+            0% {
+                opacity: 0.4;
+                transform: translateY(0) scaleY(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(-15px) scaleY(1.2);
+            }
+            100% {
+                opacity: 0.3;
+                transform: translateY(-30px) scaleY(0.6);
+            }
+        }
+        
+        @keyframes ornamentGlow {
+            0%, 100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        @keyframes textSparkle {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.3);
+            }
+        }
+        
+        @keyframes letterBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Снежинки -->
+    <div class="snowflake" style="left: 10%; animation-duration: 8s;">❄</div>
+    <div class="snowflake" style="left: 20%; animation-duration: 10s; animation-delay: 1s;">❄</div>
+    <div class="snowflake" style="left: 30%; animation-duration: 9s; animation-delay: 2s;">❄</div>
+    <div class="snowflake" style="left: 40%; animation-duration: 11s; animation-delay: 0.5s;">❄</div>
+    <div class="snowflake" style="left: 50%; animation-duration: 8s; animation-delay: 1.5s;">❄</div>
+    <div class="snowflake" style="left: 60%; animation-duration: 10s; animation-delay: 2.5s;">❄</div>
+    <div class="snowflake" style="left: 70%; animation-duration: 9s; animation-delay: 0.8s;">❄</div>
+    <div class="snowflake" style="left: 80%; animation-duration: 11s; animation-delay: 1.8s;">❄</div>
+    <div class="snowflake" style="left: 90%; animation-duration: 8s; animation-delay: 3s;">❄</div>
+    
+    <div class="container">
+        <div class="coffee-cup">
+            <div class="cup-body">
+                <div class="coffee-liquid"></div>
+                <div class="ornament ornament-1"></div>
+                <div class="ornament ornament-2"></div>
+                <div class="ornament ornament-3"></div>
+            </div>
+            <div class="cup-handle"></div>
+            <div class="steam steam-1"></div>
+            <div class="steam steam-2"></div>
+            <div class="steam steam-3"></div>
+        </div>
+        
+        <div class="logo-text">
+            <span class="letter">U</span>
+            <span class="letter">R</span>
+            <span class="letter">B</span>
+            <span class="letter">A</span>
+            <span class="letter">N</span>
+            <span style="margin: 0 5px;"></span>
+            <span class="letter">B</span>
+            <span class="letter">R</span>
+            <span class="letter">E</span>
+            <span class="letter">W</span>
+        </div>
+    </div>
+</body>
+</html>

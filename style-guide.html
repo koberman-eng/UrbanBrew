@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Brew - Демо-страница мультимедиа</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 50%, #3a4a5a 100%);
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .demo-card {
+            background: linear-gradient(135deg, #2a3a4a 0%, #3a4a5a 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+        
+        .demo-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .demo-preview {
+            width: 100%;
+            height: 300px;
+            background: transparent;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .demo-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .demo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .demo-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .demo-preview#lottie-demo {
+            background: linear-gradient(135deg, #2a3a5a 0%, #1a2a3a 100%);
+        }
+        
+        .code-example {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .code-example code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #00ff88;
+            line-height: 1.8;
+        }
+        
+        .code-example code .comment {
+            color: #888;
+        }
+        
+        .code-example code .tag {
+            color: #ff6b9d;
+        }
+        
+        .code-example code .attr {
+            color: #4ec9b0;
+        }
+        
+        .code-example code .string {
+            color: #ce9178;
+        }
+        
+        .recommendations {
+            background: linear-gradient(135deg, #2a3a4a 0%, #3a4a5a 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            margin-top: 40px;
+        }
+        
+        .recommendations h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        
+        .recommendations ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .recommendations li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+        
+        .recommendations li:last-child {
+            border-bottom: none;
+        }
+        
+        .recommendations li strong {
+            color: #FFD700;
+            font-weight: 600;
+        }
+        
+        .description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .demo-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Демо-страница мультимедиа</h1>
+            <p>Интеграция анимаций для веб-сайта Urban Brew: GIF, видео и Lottie анимации с рекомендациями по использованию</p>
+        </div>
+        
+        <!-- GIF Анимация -->
+        <div class="section">
+            <h2 class="section-title">1. GIF Анимация</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>Пример интеграции</h3>
+                    <div class="demo-preview">
+                        <iframe src="assets/animations/logo-animation.html"></iframe>
+                    </div>
+                    <p class="description">
+                        Анимация логотипа с чашкой кофе. Используется для привлечения внимания и создания атмосферы.
+                    </p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3>Код интеграции</h3>
+                    <div class="code-example">
+                        <code>
+<span class="comment">&lt;!-- GIF через тег &lt;img&gt; --&gt;</span><br>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="string">"assets/animations/logo-animation.gif"</span> <span class="attr">alt</span>=<span class="string">"Logo Animation"</span> <span class="tag">/&gt;</span><br>
+<br>
+<span class="comment">&lt;!-- Или через iframe для HTML анимаций --&gt;</span><br>
+<span class="tag">&lt;iframe</span> <span class="attr">src</span>=<span class="string">"assets/animations/logo-animation.html"</span><span class="tag">&gt;&lt;/iframe&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h4>Рекомендации по использованию:</h4>
+                        <ul>
+                            <li><strong>Размеры:</strong> Рекомендуемый размер 200x200px для логотипа, 400x300px для баннеров</li>
+                            <li><strong>Формат:</strong> GIF с оптимизацией цветовой палитры (256 цветов или меньше)</li>
+                            <li><strong>Вес файла:</strong> Старайтесь не превышать 500KB для быстрой загрузки</li>
+                            <li><strong>Цикл:</strong> Анимация должна быть бесконечной (loop: Forever)</li>
+                            <li><strong>Производительность:</strong> Используйте для простых анимаций, не более 12 кадров</li>
+                            <li><strong>Совместимость:</strong> Работает во всех современных браузерах</li>
+                            <li><strong>Альтернатива:</strong> Для лучшего качества используйте MP4 видео или Lottie</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Видео Анимация -->
+        <div class="section">
+            <h2 class="section-title">2. Видео Анимация</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>Пример интеграции</h3>
+                    <div class="demo-preview" style="height: 350px;">
+                        <iframe src="assets/animations/hero-banner-animation.html" style="transform: scale(0.29); transform-origin: center center; width: 1200px; height: 630px; position: absolute;"></iframe>
+                    </div>
+                    <p class="description">
+                        Hero-баннер с анимацией. Идеально подходит для главной секции сайта.
+                    </p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3>Код интеграции</h3>
+                    <div class="code-example">
+                        <code>
+<span class="comment">&lt;!-- Видео через тег &lt;video&gt; с autoplay и loop --&gt;</span><br>
+<span class="tag">&lt;video</span> <span class="attr">autoplay</span> <span class="attr">loop</span> <span class="attr">muted</span> <span class="attr">playsinline</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="string">"assets/animations/hero-banner.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span> <span class="tag">/&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="string">"assets/animations/hero-banner.webm"</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> <span class="tag">/&gt;</span><br>
+<span class="tag">&lt;/video&gt;</span><br>
+<br>
+<span class="comment">&lt;!-- Или через iframe для HTML анимаций --&gt;</span><br>
+<span class="tag">&lt;iframe</span> <span class="attr">src</span>=<span class="string">"assets/animations/hero-banner-animation.html"</span><span class="tag">&gt;&lt;/iframe&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h4>Рекомендации по использованию:</h4>
+                        <ul>
+                            <li><strong>Размеры:</strong> 1200x630px для соцсетей, 1920x1080px для hero-секций</li>
+                            <li><strong>Формат:</strong> MP4 (H.264) для совместимости, WebM для лучшего сжатия</li>
+                            <li><strong>Вес файла:</strong> Оптимизируйте до 2-5MB для быстрой загрузки</li>
+                            <li><strong>Длительность:</strong> 5-10 секунд для hero-баннеров</li>
+                            <li><strong>Атрибуты:</strong> Обязательно используйте autoplay, loop, muted, playsinline</li>
+                            <li><strong>Производительность:</strong> Видео должно быть без звука (muted) для автовоспроизведения</li>
+                            <li><strong>Адаптивность:</strong> Используйте CSS для масштабирования: width: 100%; height: auto;</li>
+                            <li><strong>Fallback:</strong> Добавьте статичное изображение для медленных соединений</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lottie Анимация -->
+        <div class="section">
+            <h2 class="section-title">3. Lottie Анимация</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>Пример интеграции</h3>
+                    <div class="demo-preview" id="lottie-demo">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <defs>
+                                <linearGradient id="lottieCupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#D7CCC8;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8D6E63;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <g class="lottie-cup" transform="translate(50, 40)">
+                                <path d="M 20 10 L 20 70 Q 20 80 30 80 L 70 80 Q 80 80 80 70 L 80 10" 
+                                      fill="none" stroke="url(#lottieCupGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M 80 40 Q 100 40 100 50 Q 100 60 80 60" 
+                                      fill="none" stroke="url(#lottieCupGrad)" stroke-width="4" stroke-linecap="round"/>
+                                <ellipse cx="50" cy="45" rx="25" ry="20" fill="#3E2723"/>
+                                <g class="lottie-steam">
+                                    <path class="steam-1" d="M 30 10 Q 28 0 30 -10" stroke="url(#lottieCupGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                    <path class="steam-2" d="M 50 10 Q 48 0 50 -10" stroke="url(#lottieCupGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                    <path class="steam-3" d="M 70 10 Q 68 0 70 -10" stroke="url(#lottieCupGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                </g>
+                            </g>
+                            <text x="100" y="140" font-family="'Montserrat', sans-serif" font-size="24" font-weight="700" fill="#FFD700" text-anchor="middle">URBAN BREW</text>
+                        </svg>
+                    </div>
+                    <p class="description">
+                        Векторная анимация чашки кофе. Легковесная и масштабируемая без потери качества.
+                    </p>
+                </div>
+                
+                <div class="demo-card">
+                    <h3>Код интеграции</h3>
+                    <div class="code-example">
+                        <code>
+<span class="comment">&lt;!-- Подключение Lottie.js через CDN --&gt;</span><br>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><br>
+<br>
+<span class="comment">&lt;!-- Контейнер для анимации --&gt;</span><br>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="string">"lottie-container"</span><span class="tag">&gt;&lt;/div&gt;</span><br>
+<br>
+<span class="comment">&lt;!-- Инициализация анимации --&gt;</span><br>
+<span class="tag">&lt;script&gt;</span><br>
+&nbsp;&nbsp;<span class="comment">var animation = lottie.loadAnimation({</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">container</span>: <span class="string">document.getElementById('lottie-container'),</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">renderer</span>: <span class="string">'svg',</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">loop</span>: <span class="string">true,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">autoplay</span>: <span class="string">true,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">path</span>: <span class="string">'assets/animations/coffee-cup.json'</span><br>
+&nbsp;&nbsp;<span class="tag">});</span><br>
+<span class="tag">&lt;/script&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h4>Рекомендации по использованию:</h4>
+                        <ul>
+                            <li><strong>Размеры:</strong> Масштабируется без потери качества, используйте любые размеры</li>
+                            <li><strong>Формат:</strong> JSON файл, экспортированный из After Effects через Bodymovin</li>
+                            <li><strong>Вес файла:</strong> Обычно 10-100KB, значительно легче видео</li>
+                            <li><strong>Рендерер:</strong> SVG для качества, Canvas для производительности</li>
+                            <li><strong>Производительность:</strong> Идеально для сложных векторных анимаций</li>
+                            <li><strong>Совместимость:</strong> Работает во всех современных браузерах</li>
+                            <li><strong>Контроль:</strong> Можно управлять воспроизведением через JavaScript API</li>
+                            <li><strong>Оптимизация:</strong> Удаляйте неиспользуемые слои из After Effects перед экспортом</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Общие рекомендации -->
+        <div class="section">
+            <h2 class="section-title">Общие рекомендации</h2>
+            <div class="recommendations">
+                <h4>Условия воспроизведения:</h4>
+                <ul>
+                    <li><strong>Автовоспроизведение:</strong> Используйте muted для видео, чтобы избежать блокировки браузером</li>
+                    <li><strong>Производительность:</strong> Ограничьте количество одновременных анимаций на странице</li>
+                    <li><strong>Мобильные устройства:</strong> Тестируйте на реальных устройствах, учитывайте ограничения батареи</li>
+                    <li><strong>Загрузка:</strong> Используйте lazy loading для анимаций ниже первого экрана</li>
+                    <li><strong>Fallback:</strong> Всегда предоставляйте статичную альтернативу для медленных соединений</li>
+                    <li><strong>Доступность:</strong> Предоставляйте возможность отключения анимаций для пользователей с ограниченными возможностями</li>
+                    <li><strong>SEO:</strong> Добавляйте alt-тексты и описания для всех анимаций</li>
+                </ul>
+                
+                <h4 style="margin-top: 40px;">Оптимизация:</h4>
+                <ul>
+                    <li><strong>Сжатие:</strong> Используйте инструменты для оптимизации GIF (GIFsicle) и видео (HandBrake)</li>
+                    <li><strong>Кэширование:</strong> Настройте правильные заголовки кэширования для статических файлов</li>
+                    <li><strong>CDN:</strong> Используйте CDN для быстрой доставки медиа-файлов</li>
+                    <li><strong>Форматы:</strong> Предоставляйте несколько форматов (WebP, AVIF) для лучшей совместимости</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .lottie-cup {
+            animation: lottieFloat 3s ease-in-out infinite;
+        }
+        
+        .lottie-steam .steam-1 {
+            animation: lottieSteam 2s ease-in-out infinite;
+            animation-delay: 0s;
+        }
+        
+        .lottie-steam .steam-2 {
+            animation: lottieSteam 2s ease-in-out infinite;
+            animation-delay: 0.4s;
+        }
+        
+        .lottie-steam .steam-3 {
+            animation: lottieSteam 2s ease-in-out infinite;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes lottieFloat {
+            0%, 100% {
+                transform: translate(50, 40) translateY(0);
+            }
+            50% {
+                transform: translate(50, 40) translateY(-10px);
+            }
+        }
+        
+        @keyframes lottieSteam {
+            0% {
+                opacity: 0.4;
+                transform: translateY(0) scaleY(0.8);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateY(-15px) scaleY(1.2);
+            }
+            100% {
+                opacity: 0.3;
+                transform: translateY(-30px) scaleY(0.6);
+            }
+        }
+    </style>
+</body>
+</html>

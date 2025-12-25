@@ -1,0 +1,47 @@
+<svg width="80" height="100" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cupGradMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D7CCC8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8D6E63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D4037;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="steamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D7CCC8;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#D7CCC8;stop-opacity:0.2" />
+    </linearGradient>
+    <radialGradient id="cupShine" cx="40%" cy="30%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <g>
+    <!-- Чашка -->
+    <path d="M 20 20 L 20 70 Q 20 80 30 80 L 50 80 Q 60 80 60 70 L 60 20" 
+          fill="none" stroke="url(#cupGradMain)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Ручка -->
+    <path d="M 60 40 Q 78 40 78 55 Q 78 70 60 70" 
+          fill="none" stroke="url(#cupGradMain)" stroke-width="3.5" stroke-linecap="round"/>
+    
+    <!-- Блюдце -->
+    <ellipse cx="40" cy="85" rx="38" ry="6" fill="url(#cupGradMain)" opacity="0.8"/>
+    <ellipse cx="40" cy="85" rx="38" ry="6" fill="none" stroke="url(#cupGradMain)" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Блеск на чашке -->
+    <ellipse cx="35" cy="35" rx="10" ry="18" fill="url(#cupShine)"/>
+    
+    <!-- Пар с градиентом -->
+    <g opacity="0.85">
+      <path d="M 30 20 Q 28 8 30 -4 Q 32 -16 30 -28" 
+            stroke="url(#steamGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M 40 20 Q 38 8 40 -4 Q 42 -16 40 -28" 
+            stroke="url(#steamGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M 50 20 Q 48 8 50 -4 Q 52 -16 50 -28" 
+            stroke="url(#steamGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Внутренняя линия чашки -->
+    <path d="M 22 22 L 22 68 Q 22 76 30 76 L 50 76 Q 58 76 58 68 L 58 22" 
+          fill="none" stroke="#5D4037" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+  </g>
+</svg>
